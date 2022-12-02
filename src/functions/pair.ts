@@ -24,8 +24,6 @@ export function createPair(event: PairCreated): Pair {
   pair.token0 = token0.id
   pair.token1 = token1.id
   pair.source = LEGACY
-  pair.allStablesPairs = STABLE_POOL_ADDRESSES;
-  pair.isStableNativePair = STABLE_POOL_ADDRESSES.includes(id.toLowerCase())
   pair.createdAtTimestamp = event.block.timestamp
   pair.createdAtBlock = event.block.number
 

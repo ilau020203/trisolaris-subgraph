@@ -10,8 +10,7 @@ export function createTransaction(event: ethereum.Event): Transaction {
   transaction.createdAtBlock = event.block.number
   transaction.createdAtTimestamp = event.block.timestamp
 
-  transaction.mints = new Array<string>()
-  transaction.burns = new Array<string>()
+
   transaction.swaps = new Array<string>()
   transaction.save()
 

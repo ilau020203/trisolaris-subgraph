@@ -170,11 +170,6 @@ type Pair @entity {
   " Pair Day Snapshot "
   daySnapshots: [PairDaySnapshot!]! @derivedFrom(field: "pair")
 
-  " check ilysha debil?"
-  isStableNativePair: Boolean
-
-  " ilysha slepoy? "
-  allStablesPairs: [String!]
 }
 
 
@@ -187,57 +182,6 @@ type LiquidityPosition @entity {
   balance: BigInt!
   createdAtBlock: BigInt!
   createdAtTimestamp: BigInt!
-}
-
-type Mint @entity {
-  " transaction.id:transaction.mints.length "
-  id: ID!
-  transaction: Transaction!
-  timestamp: BigInt! # need this to pull recent txns for specific token or pair
-  pair: Pair!
-
-  # populated from the primary Transfer event
-  to: String!
-  liquidity: BigDecimal!
-
-  # populated from the Mint event
-  sender: Bytes
-  amount0: BigDecimal
-  amount1: BigDecimal
-  logIndex: BigInt
-  # derived amount based on available prices of tokens
-  amountUSD: BigDecimal
-
-  # optional fee fields, if a Transfer event is fired in _mintFee
-  feeTo: Bytes
-  feeLiquidity: BigDecimal
-}
-
-type Burn @entity {
-  " transaction.id:transaction.burns.length "
-  id: ID!
-  transaction: Transaction!
-  timestamp: BigInt! # need this to pull recent txns for specific token or pair
-  pair: Pair!
-
-  # populated from the primary Transfer event
-  liquidity: BigDecimal!
-
-  # populated from the Burn event
-  sender: String
-  amount0: BigDecimal
-  amount1: BigDecimal
-  to: String
-  logIndex: BigInt
-  # derived amount based on available prices of tokens
-  amountUSD: BigDecimal
-
-  # mark uncomplete in ETH case
-  complete: Boolean!
-
-  # optional fee fields, if a Transfer event is fired in _mintFee
-  feeTo: String
-  feeLiquidity: BigDecimal
 }
 
 type Swap @entity {
@@ -268,8 +212,6 @@ type Transaction @entity {
   gasPrice: BigInt!
   # This is not the reverse of Mint.transaction; it is only used to
   # track incomplete mints (similar for burns and swaps)
-  mints: [Mint!]! 
-  burns: [Burn!]!
   swaps: [Swap!]!
   createdAtBlock: BigInt!
   createdAtTimestamp: BigInt!
@@ -342,68 +284,3 @@ type PairDaySnapshot @entity {
   apr: BigDecimal!
   transactionCount: BigInt!
 }
-
-type TokenHourSnapshot @entity {
-  " {tokenId}-hour-{timestamp} "
-  id: ID!
-  date: Int!
-  token: Token!
-  liquidity: BigDecimal!
-  liquidityNative: BigDecimal!
-  liquidityUSD: BigDecimal!
-  volume: BigDecimal!
-  volumeNative: BigDecimal!
-  volumeUSD: BigDecimal!
-  priceNative: BigDecimal!
-  priceUSD: BigDecimal!
-  feesNative: BigDecimal!
-  feesUSD: BigDecimal!
-  transactionCount: BigInt!
-}
-
-type TokenDaySnapshot @entity {
-  " {tokenId}-day-{timestamp} "
-  id: ID!
-  date: Int!
-  token: Token!
-  liquidity: BigDecimal!
-  liquidityNative: BigDecimal!
-  liquidityUSD: BigDecimal!
-  volume: BigDecimal!
-  volumeNative: BigDecimal!
-  volumeUSD: BigDecimal!
-  priceNative: BigDecimal!
-  priceUSD: BigDecimal!
-  feesNative: BigDecimal!
-  feesUSD: BigDecimal!
-  transactionCount: BigInt!
-}
-
-type FactoryHourSnapshot @entity {
-  " {factoryId}-hour-{timestamp} "
-  id: ID!
-  factory: Factory!
-  date: Int!
-  volumeUSD: BigDecimal!
-  volumeNative: BigDecimal!
-  liquidityNative: BigDecimal!
-  liquidityUSD: BigDecimal!
-  feesNative: BigDecimal!
-  feesUSD: BigDecimal!
-  transactionCount: BigInt!
-}
-
-type FactoryDaySnapshot @entity {
-  " {factoryId}-day-{timestamp} "
-  id: ID!
-  factory: Factory!
-  date: Int!
-  volumeUSD: BigDecimal!
-  volumeNative: BigDecimal!
-  liquidityNative: BigDecimal!
-  liquidityUSD: BigDecimal!
-  feesNative: BigDecimal!
-  feesUSD: BigDecimal!
-  transactionCount: BigInt!
-}
-

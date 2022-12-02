@@ -8,7 +8,7 @@ dataSources:
     source:
       address: '0xc66F594268041dB60507F00703b152492fb176E7'
       abi: Factory
-      startBlock: 0
+      startBlock: 40069511
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.7
@@ -55,11 +55,5 @@ templates:
       eventHandlers:
         - event: Sync(uint112,uint112)
           handler: onSync
-        - event: Transfer(indexed address,indexed address,uint256)
-          handler: onTransfer
-        - event: Mint(indexed address,uint256,uint256)
-          handler: onMint
-        - event: Burn(indexed address,uint256,uint256,indexed address)
-          handler: onBurn
         - event: Swap(indexed address,uint256,uint256,uint256,uint256,indexed address)
           handler: onSwap
