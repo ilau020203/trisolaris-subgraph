@@ -8,27 +8,23 @@ import {
 } from '../../generated/templates/Pair/Pair'
 // import { handleBurn } from '../burn'
 import {
-  createLiquidityPositionSnapshot,
-  getOrCreateLiquidityPosition,
+  // createLiquidityPositionSnapshot,
+  // getOrCreateLiquidityPosition,
   // getOrCreateUser,
   // updateFactorySnapshots,
   updatePairSnapshots,
   // updateTokenSnapshots
 } from '../functions'
 // import { handleMint } from '../mint'
-import { handleSwap, updateApr } from '../swap'
-import { createLiquidityPositions  } from '../transfer'
-import { updateLiquidity, updateTvlAndTokenPrices, updateVolume } from '../update-price-tvl-volume'
+// import { handleSwap, updateApr } from '../swap'
+// import { createLiquidityPositions  } from '../transfer'
+import { updateVolume } from '../update-price-tvl-volume'
 
-export function onSync(event: SyncEvent): void {
-  updateTvlAndTokenPrices(event)
-}
 
 
 export function onSwap(event: SwapEvent): void {
   const volume = updateVolume(event)
-  handleSwap(event, volume.volumeUSD)
+  // handleSwap(event)
   updatePairSnapshots(event.block.timestamp, event.address, volume)
-  updateApr(event)
 }
 

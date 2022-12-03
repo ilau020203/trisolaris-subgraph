@@ -53,7 +53,5 @@ templates:
         - name: NameBytes32
           file: ./abis/ERC20NameBytes.json
       eventHandlers:
-        - event: Sync(uint112,uint112)
-          handler: onSync
         - event: Swap(indexed address,uint256,uint256,uint256,uint256,indexed address)
           handler: onSwap

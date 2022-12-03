@@ -19,31 +19,15 @@ export function createPair(event: PairCreated): Pair {
 
   pair.name = token0.symbol.concat('-').concat(token1.symbol)
   pair.type = PairType.CONSTANT_PRODUCT_POOL
-  pair.swapFee = SWAP_FEE
-  pair.twapEnabled = TWAP_ENABLED
+
   pair.token0 = token0.id
   pair.token1 = token1.id
-  pair.source = LEGACY
   pair.createdAtTimestamp = event.block.timestamp
   pair.createdAtBlock = event.block.number
 
-  pair.reserve0 = BIG_INT_ZERO
-  pair.reserve1 = BIG_INT_ZERO
-  pair.token0Price = BIG_DECIMAL_ZERO
-  pair.token1Price = BIG_DECIMAL_ZERO
-  pair.liquidity = BIG_INT_ZERO
-  pair.trackedLiquidityNative = BIG_DECIMAL_ZERO
-  pair.liquidityNative = BIG_DECIMAL_ZERO
-  pair.liquidityUSD = BIG_DECIMAL_ZERO
-  pair.volumeNative = BIG_DECIMAL_ZERO
-  pair.volumeUSD = BIG_DECIMAL_ZERO
   pair.volumeToken0 = BIG_DECIMAL_ZERO
   pair.volumeToken1 = BIG_DECIMAL_ZERO
-  pair.feesNative = BIG_DECIMAL_ZERO
-  pair.feesUSD = BIG_DECIMAL_ZERO
-  pair.apr = BIG_DECIMAL_ZERO
-  pair.aprUpdatedAtTimestamp = BIG_INT_ZERO
-  pair.txCount = BIG_INT_ZERO
+
 
   pair.save()
 

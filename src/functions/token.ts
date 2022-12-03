@@ -5,21 +5,18 @@ import { SymbolBytes32 } from '../../generated/Factory/SymbolBytes32'
 import { Token } from '../../generated/schema'
 import { BIG_DECIMAL_ZERO, BIG_INT_ONE, BIG_INT_ZERO } from '../constants'
 import { getOrCreateFactory } from './factory'
-import { createTokenPrice } from './token-price'
 
 export function getOrCreateToken(id: string): Token {
   let token = Token.load(id)
 
   if (token === null) {
     token = new Token(id)
-    createTokenPrice(id)
 
     const contract = ERC20.bind(Address.fromString(id))
 
     const decimals = getTokenDecimals(contract)
     const name = getTokenName(contract)
     const symbol = getTokenSymbol(contract)
-    token.price = id
     token.name = name.value
     token.nameSuccess = name.success
     token.symbol = symbol.value
@@ -31,12 +28,7 @@ export function getOrCreateToken(id: string): Token {
     token.liquidityNative = BIG_DECIMAL_ZERO
     token.liquidityUSD = BIG_DECIMAL_ZERO
     token.volume = BIG_DECIMAL_ZERO
-    token.volumeNative = BIG_DECIMAL_ZERO
-    token.volumeUSD = BIG_DECIMAL_ZERO
-    token.feesNative = BIG_DECIMAL_ZERO
-    token.feesUSD = BIG_DECIMAL_ZERO
-    token.txCount = BIG_INT_ZERO
-    token.pairCount = BIG_INT_ZERO
+
 
     token.save()
     const factory = getOrCreateFactory()

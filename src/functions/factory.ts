@@ -8,24 +8,17 @@ export function getOrCreateFactory(id: Address = FACTORY_ADDRESS): Factory {
   if (factory === null) {
     factory = new Factory(id.toHex().toLowerCase())
     factory.type = PairType.CONSTANT_PRODUCT_POOL
-    factory.volumeUSD = BIG_DECIMAL_ZERO
-    factory.volumeNative = BIG_DECIMAL_ZERO
-    factory.liquidityUSD = BIG_DECIMAL_ZERO
-    factory.liquidityNative = BIG_DECIMAL_ZERO
-    factory.feesUSD = BIG_DECIMAL_ZERO
-    factory.feesNative = BIG_DECIMAL_ZERO
+   
     factory.pairCount = BIG_INT_ZERO
-    factory.transactionCount = BIG_INT_ZERO
     factory.tokenCount = BIG_INT_ZERO
-    factory.userCount = BIG_INT_ZERO
+
     factory.save()
   }
 
   return factory as Factory
 }
 
-export function increaseFactoryTransactionCount(): void {
-  const factory = getOrCreateFactory()
-  factory.transactionCount = factory.transactionCount.plus(BIG_INT_ONE)
-  factory.save()
-}
+// export function increaseFactoryTransactionCount(): void {
+//   // const factory = getOrCreateFactory()
+//   // factory.save()
+// }
