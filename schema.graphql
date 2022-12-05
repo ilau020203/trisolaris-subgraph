@@ -68,8 +68,8 @@ type Pair @entity {
   volumeToken0: BigDecimal!
   # volume token1
   volumeToken1: BigDecimal!
-  " Pair Day Snapshot "
-  daySnapshots: [PairDaySnapshot!]! @derivedFrom(field: "pair")
+  # " Pair Day Snapshot "
+  # daySnapshots: [PairDaySnapshot!]! @derivedFrom(field: "pair")
 
 }
 
@@ -105,13 +105,13 @@ type Pair @entity {
 # }
 
 
-type PairDaySnapshot @entity {
-  " {pairId}-day-{timestamp} "
-  id: ID!
-  pair: Pair!
-  date: Int!
+# type PairDaySnapshot @entity {
+#   " {pairId}-day-{timestamp} "
+#   id: ID!
+#   pair: Pair!
+#   date: Int!
 
-  volumeToken0: BigDecimal!
-  volumeToken1: BigDecimal!
+#   volumeToken0: BigDecimal!
+#   volumeToken1: BigDecimal!
 
-}
+# }

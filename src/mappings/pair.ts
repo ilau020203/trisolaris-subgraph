@@ -12,7 +12,7 @@ import {
   // getOrCreateLiquidityPosition,
   // getOrCreateUser,
   // updateFactorySnapshots,
-  updatePairSnapshots,
+  // updatePairSnapshots,
   // updateTokenSnapshots
 } from '../functions'
 // import { handleMint } from '../mint'
@@ -23,8 +23,8 @@ import { updateVolume } from '../update-price-tvl-volume'
 
 
 export function onSwap(event: SwapEvent): void {
-  const volume = updateVolume(event)
+  updateVolume(event)
   // handleSwap(event)
-  updatePairSnapshots(event.block.timestamp, event.address, volume)
+  // updatePairSnapshots(event.block.timestamp, event.address, volume)
 }
 
