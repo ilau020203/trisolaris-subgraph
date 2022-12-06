@@ -24,7 +24,6 @@ import { updateVolume } from '../update-price-tvl-volume'
 
 export function onSwap(event: SwapEvent): void {
   const volume = updateVolume(event)
-  // handleSwap(event)
   updatePairSnapshots(event.block.timestamp, event.address, volume)
 }
 

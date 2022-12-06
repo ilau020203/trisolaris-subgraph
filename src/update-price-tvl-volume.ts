@@ -109,6 +109,7 @@ export function updateVolume(event: SwapEvent): Volume {
   }
 }
 
+
 // export function updateLiquidity(event: TransferEvent): void {
 //   if (isInitialTransfer(event)) {
 //     return
